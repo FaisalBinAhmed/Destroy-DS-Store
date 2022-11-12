@@ -1,13 +1,10 @@
-
-
-use std::path::Display;
+use std::fs;
 
 use walkdir::WalkDir;
 
 
 
 fn main() {
-    // println!("Hello, world!");
 
     let current_dir: String = String::from("./");
 
@@ -25,8 +22,19 @@ fn main() {
     println!("{}", entry.path().display());
 }
 
-println!("total DS_Store found: {}", counter);
-println!("Locations: {:?}", ds_path)
+    println!("total DS_Store found: {}", counter);
+    println!("Locations: {:?}", ds_path);
+
+    println!("Removing found .DS_Store files");
+
+    for file_path in ds_path {
+
+        fs::remove_file(file_path).unwrap_or_else(|why| {
+            println!("! {:?}", why.kind());
+        });
+    }
+
+
 
 
 }
