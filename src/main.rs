@@ -30,7 +30,7 @@ fn main() {
     for file_path in ds_path {
 
         fs::remove_file(file_path).unwrap_or_else(|why| {
-            println!("! {:?}", why.kind());
+            println!("Error deleting the file because {:?}", why.kind());
         });
     }
 
