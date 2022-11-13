@@ -1,26 +1,21 @@
 use std::fs;
 
-use walkdir::WalkDir;
+use walkdir::{WalkDir, DirEntry};
 
 
 
 fn main() {
 
     let current_dir: String = String::from("./");
-
     let mut counter: i32 = 0;
     let mut ds_path: Vec<String> = vec![];
 
-    for entry in WalkDir::new(&current_dir) {
-    let entry = entry.unwrap();
-
-    if entry.file_name() == ".DS_Store" {
-        counter+=1;
-        ds_path.push(entry.path().display().to_string())
+    for files in WalkDir::new(&current_dir) {
+        match files {
+            Ok(f) => process_file(f, &mut counter, &mut ds_path),
+            Err(e) => println!("error reading file {}", e)
+        }
     }
-
-    println!("{}", entry.path().display());
-}
 
     println!("total DS_Store found: {}", counter);
     println!("Locations: {:?}", ds_path);
@@ -34,7 +29,12 @@ fn main() {
         });
     }
 
+}
 
-
-
+fn process_file(file: DirEntry, counter: &mut i32, ds_path: &mut Vec<String>){
+    if file.file_name() == ".DS_Store" {
+        *counter+=1; // dereferencing because counter is a pointer and we are increasing the value not the pointer itself
+        ds_path.push(file.path().display().to_string())
+    }
+    println!("{}", file.path().display());
 }
