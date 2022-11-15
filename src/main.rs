@@ -20,14 +20,23 @@ fn main() {
     println!("total DS_Store found: {}", counter);
     println!("Locations: {:?}", ds_path);
 
-    println!("Removing found .DS_Store files");
+    // println!("Removing found .DS_Store files");
 
-    for file_path in ds_path {
+    if(ds_path.is_empty()){
 
-        fs::remove_file(file_path).unwrap_or_else(|why| {
-            println!("Error deleting the file because {:?}", why.kind());
-        });
+        println!("No .DS_Store files found. Yay!")
+
+    }else{
+
+        for file_path in ds_path {
+    
+            fs::remove_file(file_path).unwrap_or_else(|why| {
+                println!("Error deleting the file because {:?}", why.kind());
+            });
+        }
+
     }
+
 
 }
 
@@ -36,5 +45,5 @@ fn process_file(file: DirEntry, counter: &mut i32, ds_path: &mut Vec<String>){
         *counter+=1; // dereferencing because counter is a pointer and we are increasing the value not the pointer itself
         ds_path.push(file.path().display().to_string())
     }
-    println!("{}", file.path().display());
+    println!("{:?} -> {}", file.file_name(), file.path().display());
 }
