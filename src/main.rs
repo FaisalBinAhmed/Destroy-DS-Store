@@ -31,7 +31,10 @@ fn main() {
         println!("Do yo want to delete the files? Press y to confirm");
         let mut delete_files: String = String::from("");
         
-        std::io::stdin().read_line(&mut delete_files).unwrap(); //handle Result
+        match std::io::stdin().read_line(&mut delete_files) {
+            Ok(_) => println!(""),
+            Err(e) => println!("error reading user input {}", e)
+        } 
 
         if &delete_files == "y" {
 
@@ -45,11 +48,7 @@ fn main() {
             todo!()
         }
 
-
-
-
     }
-
 
 }
 
