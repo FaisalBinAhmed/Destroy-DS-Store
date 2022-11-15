@@ -22,18 +22,31 @@ fn main() {
 
     // println!("Removing found .DS_Store files");
 
-    if(ds_path.is_empty()){
+    if ds_path.is_empty(){
 
         println!("No .DS_Store files found. Yay!")
 
     }else{
 
-        for file_path in ds_path {
-    
-            fs::remove_file(file_path).unwrap_or_else(|why| {
-                println!("Error deleting the file because {:?}", why.kind());
-            });
+        println!("Do yo want to delete the files? Press y to confirm");
+        let mut delete_files: String = String::from("");
+        
+        std::io::stdin().read_line(&mut delete_files).unwrap(); //handle Result
+
+        if &delete_files == "y" {
+
+            for file_path in ds_path {
+        
+                fs::remove_file(file_path).unwrap_or_else(|why| {
+                    println!("Error deleting the file because {:?}", why.kind());
+                });
+            }
+        }else{
+            todo!()
         }
+
+
+
 
     }
 
