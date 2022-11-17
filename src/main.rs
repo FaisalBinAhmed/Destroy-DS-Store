@@ -1,8 +1,5 @@
 use std::fs;
-
 use walkdir::{WalkDir, DirEntry};
-
-
 
 fn main() {
 
@@ -19,8 +16,6 @@ fn main() {
 
     println!("total DS_Store found: {}", counter);
     println!("Locations: {:?}", ds_path);
-
-    // println!("Removing found .DS_Store files");
 
     if ds_path.is_empty(){
 

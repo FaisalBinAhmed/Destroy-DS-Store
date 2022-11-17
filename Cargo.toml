@@ -1,5 +1,5 @@
 [package]
-name = "Destroy-DS-Store"
+name = "destroy_DS_Store"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 walkdir = "2"
+clap = "4"
