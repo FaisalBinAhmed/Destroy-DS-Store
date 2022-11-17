@@ -28,7 +28,7 @@ fn main() {
 
     }else{
 
-        println!("Do yo want to delete the files? Press y to confirm");
+        println!("Do yo want to delete the files? Press 'y' to confirm");
         let mut delete_files: String = String::from("");
         
         match std::io::stdin().read_line(&mut delete_files) {
@@ -36,7 +36,7 @@ fn main() {
             Err(e) => println!("error reading user input {}", e)
         } 
 
-        if &delete_files == "y" {
+        if delete_files.trim() == "y" {
 
             for file_path in ds_path {
         
@@ -44,8 +44,10 @@ fn main() {
                     println!("Error deleting the file because {:?}", why.kind());
                 });
             }
+            println!("Finished deleting {} files", counter)
         }else{
-            todo!()
+
+            println!("user has stopped operation")
         }
 
     }
