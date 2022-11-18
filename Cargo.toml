@@ -1,8 +1,24 @@
 [package]
 name = "destroy_ds_store"
-author = "Faisal Ahmed"
 version = "1.0.0"
+author = "Faisal Ahmed"
+description = "Delete the annoying .DS_Store files from the current folder and all its sub-folders."
 edition = "2021"
+include = [
+	"src/**/*",
+	"Cargo.toml",
+	"README.md",
+	"LICENCE"
+]
+homepage = "https://github.com/FaisalBinAhmed/Destroy-DS-Store"
+repository = "https://github.com/FaisalBinAhmed/Destroy-DS-Store"
+keywords = [
+	"cli",
+	"files",
+    "ds_store"
+]
+categories = ["command-line-interface"]
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
