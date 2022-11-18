@@ -15,7 +15,9 @@ repository = "https://github.com/FaisalBinAhmed/Destroy-DS-Store"
 keywords = [
 	"cli",
 	"files",
-    "ds_store"
+    "ds_store",
+    "delete",
+    "macos"
 ]
 categories = ["command-line-interface"]
 license = "MIT"
