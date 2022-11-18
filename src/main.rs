@@ -11,13 +11,16 @@ fn main() {
     let commands = command_line_app().get_matches();
 
     let dir: &str = commands.value_of("dir").unwrap_or("./");
-    let directory_to_scan = dir.to_string();
 
+    let directory_to_scan = dir.to_string();
     let yes_to_all = commands.is_present("yesToAll");
+    let silent = commands.is_present("silent");
+
+    println!("Searching {}", directory_to_scan);
 
     for files in WalkDir::new(&directory_to_scan) {
         match files {
-            Ok(f) => process_file(f, &mut counter, &mut ds_path),
+            Ok(f) => process_file(f, &mut counter, &mut ds_path, silent),
             Err(e) => println!("error reading file {}", e),
         }
     }
@@ -33,7 +36,9 @@ fn main() {
         if yes_to_all {
             delete_files(&ds_path)
         } else {
-            println!("Do yo want to delete the files? Press 'y' to confirm");
+            println!(
+                "Do yo want to delete the files? Type 'y' and press 'return/enter' to confirm"
+            );
             let mut user_wants_to_delete: String = String::from("");
 
             match std::io::stdin().read_line(&mut user_wants_to_delete) {
@@ -50,12 +55,14 @@ fn main() {
     }
 }
 
-fn process_file(file: DirEntry, counter: &mut i32, ds_path: &mut Vec<String>) {
+fn process_file(file: DirEntry, counter: &mut i32, ds_path: &mut Vec<String>, silent: bool) {
     if file.file_name() == ".DS_Store" {
         *counter += 1; // dereferencing because counter is a pointer and we are increasing the value not the pointer itself
         ds_path.push(file.path().display().to_string())
     }
-    println!("{:?} -> {}", file.file_name(), file.path().display());
+    if !silent {
+        println!("{:?} -> {}", file.file_name(), file.path().display());
+    }
 }
 
 fn delete_files(paths: &Vec<String>) {
@@ -64,4 +71,5 @@ fn delete_files(paths: &Vec<String>) {
             println!("Error deleting the file because {:?}", why.kind());
         });
     }
+    println!("file deletion complete!")
 }

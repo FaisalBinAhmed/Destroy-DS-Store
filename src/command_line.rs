@@ -2,6 +2,7 @@ use clap::{crate_version, App, Arg};
 
 pub fn command_line_app() -> App<'static, 'static> {
     App::new("destroy_ds_store")
+        .author("Faisal Ahmed, dev@faisalbin.com")
         .about("Delete the annoying .DS_Store files in MacOS")
         .version(crate_version!()) //this macro returns the version number from cargo.toml
         .arg(
@@ -13,5 +14,10 @@ pub fn command_line_app() -> App<'static, 'static> {
             Arg::with_name("yesToAll")
                 .short("y")
                 .help("delete all found files without asking"),
+        )
+        .arg(
+            Arg::with_name("silent")
+                .short("s")
+                .help("do not show scanned file names"),
         )
 }
