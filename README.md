@@ -13,3 +13,7 @@ To delete all .ds_store files without asking, pass the y flag like this `cargo r
 The app optionally takes the path of a directory to be scanned as an argument, to specify a path, run `cargo run -- PATH`
 
 After installing, you do not need `cargo run` anymore. Just run `destroy_ds_store PATH [FLAGS]` like `destroy_ds_store --help`
+
+More examples: `destroy_ds_store` scan current directory.
+
+`destroy_ds_store ../` scan parent directory.
