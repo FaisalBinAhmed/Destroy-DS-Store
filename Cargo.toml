@@ -1,6 +1,6 @@
 [package]
 name = "destroy_ds_store"
-version = "1.0.0"
+version = "1.0.1"
 author = "Faisal Ahmed"
 description = "Delete the annoying .DS_Store files from the current folder and all its sub-folders."
 edition = "2021"
