@@ -24,7 +24,7 @@ fn main() {
             Err(e) => println!("error reading file {}", e),
         }
     }
-
+    
     println!("total DS_Store found: {}", counter);
     println!("Locations: {:?}", ds_path);
 
